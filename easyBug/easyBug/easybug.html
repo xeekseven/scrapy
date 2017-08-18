@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+         
+    <title>最简单的bug管理系统，免费在线bug管理工具-EasyBug</title>
+    <meta name="Keywords" content="bug管理系统,bug管理工具,easybug" />
+    <meta name="Description" content="easybug,免费的在线bug管理工具与bug管理系统,不同于传统的bug管理工具,easybug将bug管理系统进行改革,真正实现在线bug管理,使用easybug,bug管理很简单" />
+ 
+  
+    
+
+    <script src="/Scripts/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <link href="/Content/data/style.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/common.js" type="text/javascript"></script>
+    <script src="/Scripts/wgxpath.install.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        wgxpath.install();
+    </script>
+</head>
+<body>
+    <!-- start of wrapper-->
+    <div class=" Wrapper">
+        <!-- start of top-->
+        <div class="Top">
+            <div class="left White">
+    <a class="DLine light-yellow" href="/">主页</a> 
+    欢迎
+    <span class="username">
+        深圳-罗涛</span>
+    已加入
+    <a class="DLine light-yellow" href="/Team/TeamList"><b>
+        2</b>
+        个团队</a> <a class="DLine light-yellow" href="/Project/ProjectList">
+            <b>
+                2</b>
+            个项目</a>|<a class="DLine light-yellow" href="/Team/MyTeam">
+                我的团队</a>|<a class="DLine light-yellow" href="/Member/MyInfo">
+                    个人资料</a>|<a class="DLine light-yellow"
+                        href="/Member/Logout">
+                        退出</a>
+    
+</div>
+
+<form id="lan_form" action="/Home/SelectLanguage" method="post">
+<div class="right help-language">
+    <!--<span class="icon_biger"><a class="help-icon" href="http://www.uinicall.com/client/uinicall.php?room=10325&userid=13207&code=1"
+        target="_blank">
+        在线咨询
+    </a></span> --><span class="icon_big">
+        语言</span> <a href="javascript:SetLanguage('zh-CN')">
+            <img title='中文简体' src="/Content/images/countrygif/cn.gif" />&nbsp;中</a>
+    <a href="javascript:SetLanguage('en-US')">
+        <img title='英文' src="/Content/images/countrygif/gb.gif" />&nbsp;EN</a>
+    <input id="hidden_lan" type="hidden" value="zh-CN" name="lan" />
+    <input type="hidden" value="/Bug/AllBug/4745" name="addr" />
+</div>
+</form>
+
+        </div>
+        <!--end of top-->
+        
+    <script src="/Scripts/jquery-1.3.2.min.js" type="text/javascript"></script>
+    
+<!-- start of subheader-->
+<div class="SubHeader">
+    <span class="left">
+        
+        <img src="/Content/TeamLogo/201207191758569460_logo.jpg"
+            class="BlueBorder icon_biger user-logo-define" />
+        
+        <select id="s_prj" class="Select" onchange="ChangePrj();">
+            
+            <option value="4745" selected='selected'>
+                路网通</option>
+            
+        </select>
+    </span>
+
+    <script type="text/javascript">
+    function ChangePrj()
+    { 
+      var url=window.location.toString();
+      if (url.toLowerCase().indexOf("addbug")>0)
+      {
+        url=url.substring(0,url.lastIndexOf("/"))  
+        window.location= url.substring(0,url.lastIndexOf("/")+1)+document.getElementById('s_prj').value+"/0";
+        return;
+      }
+      window.location= url.substring(0,url.lastIndexOf("/")+1)+document.getElementById('s_prj').value;
+    }
+    </script>
+
+    <ul class="Menu">
+        
+        <li><a href="/Project/ProjectInfo/4745" class="menu1 ">
+            项目概况</a></li>
+        <li><a href="/Bug/MyBug/4745" class="menu2 ">
+            分配给我的Bug</a></li>
+        <li><a href="/Bug/MyCreateBug/4745" class="menu3 ">
+            我创建的Bug</a></li>
+        <li><a href="/Bug/AllBug/4745" class="menu4 Activity">
+            所有Bug</a></li>
+        <li><a href="/Bug/BugStat/4745" class="menu5 ">
+            Bug统计</a></li>
+        
+    </ul>
+</div>
+<!-- end of subheader-->
+
+    <!-- start of content -->
+    <div class="Content">
+        <div class="Right">
+            <div class="Bugicon Midbox">
+                所有Bug</div>
+            <div class="relative CenterBox Sub">
+                <form id="_form" action="/Bug/AllBug/4745" method="post">
+                <input type="hidden" value="" name="orderBy" id="OrderBy" />
+                <input type="hidden" value="4745" name="pid" />
+                <input id="pageIndex" type="hidden" value="1" name="pageIndex" />
+                <div id="SearchBox" class="SearchBox left">
+                    <span class="icon_bigest left">
+                        <label>
+                            优先级</label>
+                        <select name="priority" onchange="SubForm();" class="SearchSelect1 left">
+                            <option value="0">
+                                全部</option>
+                            
+                            <option value="1" >
+                                低</option>
+                            
+                            <option value="2" >
+                                中</option>
+                            
+                            <option value="3" >
+                                高</option>
+                            
+                            <option value="4" >
+                                紧急</option>
+                            
+                            <option value="5" >
+                                严重</option>
+                            
+                        </select>
+                    </span><span class="icon_bigest  left">
+                        <label>
+                            分配人</label>
+                        <select name="member" onchange="SubForm();" class="SearchSelect left">
+                            <option value="0">
+                                全部</option>
+                            
+                            <option value="81302" >
+                                baimingming</option>
+                            
+                            <option value="59878" >
+                                cc-chenliang</option>
+                            
+                            <option value="78123" >
+                                changdeyong</option>
+                            
+                            <option value="50584" >
+                                chendongjie</option>
+                            
+                            <option value="30856" >
+                                gaowei</option>
+                            
+                            <option value="79602" >
+                                guoxi</option>
+                            
+                            <option value="45745" >
+                                hujinxi</option>
+                            
+                            <option value="55611" >
+                                jiaochen</option>
+                            
+                            <option value="54092" >
+                                liuyadi</option>
+                            
+                            <option value="78810" >
+                                liweicong</option>
+                            
+                            <option value="79132" >
+                                liyouyang</option>
+                            
+                            <option value="29915" >
+                                lvweijiang</option>
+                            
+                            <option value="56429" >
+                                renruiwen</option>
+                            
+                            <option value="69945" >
+                                suijinchao</option>
+                            
+                            <option value="30932" >
+                                wangjun</option>
+                            
+                            <option value="84823" >
+                                wuhao</option>
+                            
+                            <option value="84024" >
+                                wukunpeng</option>
+                            
+                            <option value="83851" >
+                                wutingliang</option>
+                            
+                            <option value="23723" >
+                                xuerren</option>
+                            
+                            <option value="23377" >
+                                yangyuanhu</option>
+                            
+                            <option value="47877" >
+                                zhanghongtao</option>
+                            
+                            <option value="33149" >
+                                zhangyuanlin</option>
+                            
+                            <option value="35667" >
+                                zhangzhengrong</option>
+                            
+                            <option value="84188" >
+                                zhaoyuebin</option>
+                            
+                            <option value="16345" >
+                                白明</option>
+                            
+                            <option value="16656" >
+                                昌德勇_贵州</option>
+                            
+                            <option value="22217" >
+                                陈亮</option>
+                            
+                            <option value="16247" >
+                                房首永</option>
+                            
+                            <option value="78960" >
+                                河北李跃明</option>
+                            
+                            <option value="83075" >
+                                黄欢</option>
+                            
+                            <option value="55321" >
+                                黄寿兴</option>
+                            
+                            <option value="16161" >
+                                揭英虎</option>
+                            
+                            <option value="20435" >
+                                李健新</option>
+                            
+                            <option value="17290" >
+                                李鹏程</option>
+                            
+                            <option value="51058" >
+                                李召峰</option>
+                            
+                            <option value="16610" >
+                                林进聪</option>
+                            
+                            <option value="22787" >
+                                刘蓓</option>
+                            
+                            <option value="78854" >
+                                宁夏-曾旗</option>
+                            
+                            <option value="61036" >
+                                宁夏-张扬</option>
+                            
+                            <option value="7228" >
+                                秦晋</option>
+                            
+                            <option value="74757" >
+                                深圳-陈奇</option>
+                            
+                            <option value="86226" >
+                                深圳-葛文娟</option>
+                            
+                            <option value="74760" >
+                                深圳-胡文忠</option>
+                            
+                            <option value="16153" >
+                                深圳-李炳旋</option>
+                            
+                            <option value="87944" >
+                                深圳-李嘉</option>
+                            
+                            <option value="87079" >
+                                深圳-李金宝</option>
+                            
+                            <option value="87536" >
+                                深圳-罗涛</option>
+                            
+                            <option value="84414" >
+                                深圳-强涛</option>
+                            
+                            <option value="16305" >
+                                深圳-邱建威</option>
+                            
+                            <option value="54037" >
+                                深圳-桑聪</option>
+                            
+                            <option value="79572" >
+                                深圳-唐连杰</option>
+                            
+                            <option value="87535" >
+                                深圳-王亮</option>
+                            
+                            <option value="78763" >
+                                深圳-王思楷</option>
+                            
+                            <option value="85981" >
+                                深圳-谢魏勇</option>
+                            
+                            <option value="83847" >
+                                深圳-曾令锐</option>
+                            
+                            <option value="16144" >
+                                深圳-张华斯</option>
+                            
+                            <option value="70059" >
+                                深圳-赵海荣</option>
+                            
+                            <option value="80791" >
+                                深圳-钟泽楷</option>
+                            
+                            <option value="22081" >
+                                谈瑞</option>
+                            
+                            <option value="16246" >
+                                汤有志</option>
+                            
+                            <option value="87136" >
+                                天津-孙焕发</option>
+                            
+                            <option value="54672" >
+                                王路</option>
+                            
+                            <option value="82485" >
+                                西安-张致林</option>
+                            
+                            <option value="78957" >
+                                杨佩轩</option>
+                            
+                            <option value="33632" >
+                                叶永雄</option>
+                            
+                            <option value="88486" >
+                                云南-吕灿</option>
+                            
+                            <option value="58280" >
+                                张艳昊</option>
+                            
+                            <option value="78430" >
+                                张子英</option>
+                            
+                        </select>
+                    </span><span class="icon_bigest left">
+                        <label>
+                            模块</label>
+                        <select name="moudle" onchange="SubForm();" class="SearchSelect left">
+                            <option value="0">
+                                全部</option>
+                            
+                            <option value="11817" >
+                                BUG_数据解析</option>
+                            
+                            <option value="11818" >
+                                需求_数据解析</option>
+                            
+                            <option value="11821" >
+                                BUG_事件合成</option>
+                            
+                            <option value="11828" >
+                                需求_事件合成</option>
+                            
+                            <option value="11829" >
+                                BUG_客户端</option>
+                            
+                            <option value="17141" >
+                                需求_客户端</option>
+                            
+                            <option value="17142" >
+                                BUG_统计</option>
+                            
+                            <option value="17143" >
+                                需求_统计</option>
+                            
+                            <option value="17144" >
+                                BUG_其它</option>
+                            
+                            <option value="17145" >
+                                需求_其它</option>
+                            
+                            <option value="41667" >
+                                BUG_智能预判</option>
+                            
+                            <option value="41668" >
+                                需求_智能预判</option>
+                            
+                            <option value="72333" >
+                                需求_集中优化</option>
+                            
+                            <option value="72334" >
+                                BUG_集中优化</option>
+                            
+                            <option value="72395" >
+                                需求_伪基站</option>
+                            
+                            <option value="72396" >
+                                BUG_伪基站</option>
+                            
+                        </select>
+                    </span><span class="left">
+                        <label>
+                            版本</label>
+                        <select name="version" onchange="SubForm();" class="SearchSelect left">
+                            <option value="0">
+                                全部</option>
+                            
+                            <option value="6572" >
+                                通用</option>
+                            
+                            <option value="6588" >
+                                新疆移动</option>
+                            
+                            <option value="6589" >
+                                陕西移动</option>
+                            
+                            <option value="9520" >
+                                杭州市移动</option>
+                            
+                            <option value="9521" >
+                                上海移动</option>
+                            
+                            <option value="9522" >
+                                江苏移动</option>
+                            
+                            <option value="9523" >
+                                河北移动</option>
+                            
+                            <option value="9525" >
+                                北京移动</option>
+                            
+                            <option value="9526" >
+                                山西移动</option>
+                            
+                            <option value="9528" >
+                                湖北移动</option>
+                            
+                            <option value="9529" >
+                                广东移动</option>
+                            
+                            <option value="9530" >
+                                广州移动</option>
+                            
+                            <option value="9531" >
+                                深圳移动</option>
+                            
+                            <option value="9533" >
+                                乌鲁木齐移动</option>
+                            
+                            <option value="9534" >
+                                宁夏移动</option>
+                            
+                            <option value="9535" >
+                                青海移动</option>
+                            
+                            <option value="9537" >
+                                西安移动</option>
+                            
+                            <option value="9538" >
+                                内蒙古移动</option>
+                            
+                            <option value="9539" >
+                                云南移动</option>
+                            
+                            <option value="9540" >
+                                贵州移动</option>
+                            
+                            <option value="9541" >
+                                重庆移动</option>
+                            
+                            <option value="9542" >
+                                黑龙江移动</option>
+                            
+                            <option value="18544" >
+                                山东移动</option>
+                            
+                            <option value="32078" >
+                                海南移动</option>
+                            
+                            <option value="40229" >
+                                江西移动</option>
+                            
+                            <option value="40230" >
+                                辽宁移动</option>
+                            
+                            <option value="44256" >
+                                河南移动</option>
+                            
+                            <option value="45283" >
+                                天津联通</option>
+                            
+                        </select>
+                    </span>
+                    <p class="clear box">
+                        <!-- -->
+                    </p>
+                    <span class="icon_bigest left">
+                        <label>
+                            状态</label>
+                        <select name="bugStatus" onchange="SubForm();" class="SearchSelect1 left">
+                            >
+                            <option value="0">
+                                全部</option>
+                            
+                            <option value="1" >
+                                未修复</option>
+                            
+                            <option value="2" >
+                                待审核</option>
+                            
+                            <option value="3" >
+                                已解决</option>
+                            
+                        </select>
+                    </span><span class="icon_bigest  left">
+                        <label>
+                            处理人</label>
+                        <select name="handler" onchange="SubForm();" class="SearchSelect left">
+                            <option value="0">
+                                全部</option>
+                            
+                            <option value="81302" >
+                                baimingming</option>
+                            
+                            <option value="59878" >
+                                cc-chenliang</option>
+                            
+                            <option value="78123" >
+                                changdeyong</option>
+                            
+                            <option value="50584" >
+                                chendongjie</option>
+                            
+                            <option value="30856" >
+                                gaowei</option>
+                            
+                            <option value="79602" >
+                                guoxi</option>
+                            
+                            <option value="45745" >
+                                hujinxi</option>
+                            
+                            <option value="55611" >
+                                jiaochen</option>
+                            
+                            <option value="54092" >
+                                liuyadi</option>
+                            
+                            <option value="78810" >
+                                liweicong</option>
+                            
+                            <option value="79132" >
+                                liyouyang</option>
+                            
+                            <option value="29915" >
+                                lvweijiang</option>
+                            
+                            <option value="56429" >
+                                renruiwen</option>
+                            
+                            <option value="69945" >
+                                suijinchao</option>
+                            
+                            <option value="30932" >
+                                wangjun</option>
+                            
+                            <option value="84823" >
+                                wuhao</option>
+                            
+                            <option value="84024" >
+                                wukunpeng</option>
+                            
+                            <option value="83851" >
+                                wutingliang</option>
+                            
+                            <option value="23723" >
+                                xuerren</option>
+                            
+                            <option value="23377" >
+                                yangyuanhu</option>
+                            
+                            <option value="47877" >
+                                zhanghongtao</option>
+                            
+                            <option value="33149" >
+                                zhangyuanlin</option>
+                            
+                            <option value="35667" >
+                                zhangzhengrong</option>
+                            
+                            <option value="84188" >
+                                zhaoyuebin</option>
+                            
+                            <option value="16345" >
+                                白明</option>
+                            
+                            <option value="16656" >
+                                昌德勇_贵州</option>
+                            
+                            <option value="22217" >
+                                陈亮</option>
+                            
+                            <option value="16247" >
+                                房首永</option>
+                            
+                            <option value="78960" >
+                                河北李跃明</option>
+                            
+                            <option value="83075" >
+                                黄欢</option>
+                            
+                            <option value="55321" >
+                                黄寿兴</option>
+                            
+                            <option value="16161" >
+                                揭英虎</option>
+                            
+                            <option value="20435" >
+                                李健新</option>
+                            
+                            <option value="17290" >
+                                李鹏程</option>
+                            
+                            <option value="51058" >
+                                李召峰</option>
+                            
+                            <option value="16610" >
+                                林进聪</option>
+                            
+                            <option value="22787" >
+                                刘蓓</option>
+                            
+                            <option value="78854" >
+                                宁夏-曾旗</option>
+                            
+                            <option value="61036" >
+                                宁夏-张扬</option>
+                            
+                            <option value="7228" >
+                                秦晋</option>
+                            
+                            <option value="74757" >
+                                深圳-陈奇</option>
+                            
+                            <option value="86226" >
+                                深圳-葛文娟</option>
+                            
+                            <option value="74760" >
+                                深圳-胡文忠</option>
+                            
+                            <option value="16153" >
+                                深圳-李炳旋</option>
+                            
+                            <option value="87944" >
+                                深圳-李嘉</option>
+                            
+                            <option value="87079" >
+                                深圳-李金宝</option>
+                            
+                            <option value="87536" >
+                                深圳-罗涛</option>
+                            
+                            <option value="84414" >
+                                深圳-强涛</option>
+                            
+                            <option value="16305" >
+                                深圳-邱建威</option>
+                            
+                            <option value="54037" >
+                                深圳-桑聪</option>
+                            
+                            <option value="79572" >
+                                深圳-唐连杰</option>
+                            
+                            <option value="87535" >
+                                深圳-王亮</option>
+                            
+                            <option value="78763" >
+                                深圳-王思楷</option>
+                            
+                            <option value="85981" >
+                                深圳-谢魏勇</option>
+                            
+                            <option value="83847" >
+                                深圳-曾令锐</option>
+                            
+                            <option value="16144" >
+                                深圳-张华斯</option>
+                            
+                            <option value="70059" >
+                                深圳-赵海荣</option>
+                            
+                            <option value="80791" >
+                                深圳-钟泽楷</option>
+                            
+                            <option value="22081" >
+                                谈瑞</option>
+                            
+                            <option value="16246" >
+                                汤有志</option>
+                            
+                            <option value="87136" >
+                                天津-孙焕发</option>
+                            
+                            <option value="54672" >
+                                王路</option>
+                            
+                            <option value="82485" >
+                                西安-张致林</option>
+                            
+                            <option value="78957" >
+                                杨佩轩</option>
+                            
+                            <option value="33632" >
+                                叶永雄</option>
+                            
+                            <option value="88486" >
+                                云南-吕灿</option>
+                            
+                            <option value="58280" >
+                                张艳昊</option>
+                            
+                            <option value="78430" >
+                                张子英</option>
+                            
+                        </select>
+                    </span><span class="icon_bigest left">
+                        <label>
+                            关键字</label>
+                        <input type="text" name="keyWord" value="" class="SearchSelect" /></span>
+                    <a href="javascript:SubmitForm('_form');" class=" Buttom "><span>
+                        搜索</span></a>
+                    
+                    <a onclick="$('#_form').attr('target','_blank').attr('action','/Bug/ExportBug/4745').submit().attr('target','_self').attr('action','/Bug/AllBug/4745');return false;" href="#/Bug/ExportBug/4745" style="margin-left: 15px" target="_blank" class=" Buttom ">
+                        <span>
+                            导出</span></a>
+                    
+                    <p class="clear box">
+                        <!-- -->
+                    </p>
+                </div>
+                </form>
+                <div class="clear">
+                    <!-- -->
+                </div>
+            </div>
+            <p class="clear" />
+            <!-- -->
+            </p>
+            <!--start of solution-->
+            <div class="Solution">
+                <a href="/Bug/AddBug/4745/0" class="button-create"><span>
+                    提交新Bug</span></a>
+                <div class="PageTop">
+                    <div class="Page">            <table class="Tableborder5" border="0" cellpadding="0" cellspacing="1">                <tbody>                    <tr align="center">                        <td class="tablebody1" >                            &nbsp;<a href="javascript:GO(1)" >刷新</a>&nbsp;</td><td class="tablebody1" >&nbsp;|                            &nbsp;显示&nbsp;1-10&nbsp;总记录数&nbsp;2955&nbsp;</td><td class="tablebody1" >&nbsp;|&nbsp;分页:</td><td class="tablebody1" style="font-weight:bold;">                            &nbsp;<span style='text-decoration:underline;'>1</span>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(2)" >2</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(3)" >3</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(4)" >4</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(5)" >5</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(6)" >6</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(7)" >7</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(8)" >8</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(9)" >9</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(10)" >10</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(2)" >下一页</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(296)" >尾页</a>&nbsp;</td></tr>                </tbody>            </table>        </div>
+                </div>
+                <table border="0" width="100%" cellpadding="10" cellspacing="0" class="Bug box">
+                    <tr class="BlueBackground Black BugTitle TableTop">
+                        <td width="40%">
+                            <b>
+                                标题</b>
+                        </td>
+                        <td width="10%">
+                            <a title="按照优先级正序排列"
+                                href="javascript:OrderByThis('BugPriorityID');"><b>
+                                    优先级</b>
+                                <img src="/Content/images/grayarrow.gif" /></a>
+                        </td>
+                        <td width="10%">
+                            <a title="按照状态正序排列"
+                                href="javascript:OrderByThis('BugStatus');"><b>
+                                    状态</b>
+                                <img src="/Content/images/grayarrow.gif" /></a>
+                        </td>
+                        <td width="10%">
+                            <a title="按照处理人正序排列"
+                                href="javascript:OrderByThis('CurrentHandler');"><b>
+                                    处理人</b>
+                                <img src="/Content/images/grayarrow.gif" /></a>
+                        </td>
+                        <td width="10%">
+                            <a title="按照模块正序排列"
+                                href="javascript:OrderByThis('ProjectModuleID');"><b>
+                                    模块</b>
+                                <img src="/Content/images/grayarrow.gif" /></a>
+                        </td>
+                        <td width="10%">
+                            <a title="按照版本正序排列"
+                                href="javascript:OrderByThis('ProjectVersionID');"><b>
+                                    版本</b>
+                                <img src="/Content/images/grayarrow.gif" /></a>
+                        </td>
+                        <td width="10%">
+                            <a title="按照日期正序排列"
+                                href="javascript:OrderByThis('CreateDate');"><b>
+                                    日期</b>
+                                <img src="/Content/images/grayarrow.gif" /></a>
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1453697" class="Blue BiggerFont">
+                                <b>
+                                    1453697#
+                                    广东_需求_地市优化流程，派单类型若为省公司派单，允许制订A类参数方案</b></a>
+                        </td>
+                        <td class="Orange">
+                            高
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-陈奇
+                        </td>
+                        <td>
+                            需求_其它
+                        </td>
+                        <td>
+                            广东移动
+                        </td>
+                        <td>
+                            2017-08-18
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1453589" class="Blue BiggerFont">
+                                <b>
+                                    1453589#
+                                    BUG_内蒙移动_TDD文件解析为FDD业务</b></a>
+                        </td>
+                        <td class="ThinGreen">
+                            中
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-张华斯
+                        </td>
+                        <td>
+                            BUG_数据解析
+                        </td>
+                        <td>
+                            通用
+                        </td>
+                        <td>
+                            2017-08-18
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1453479" class="Blue BiggerFont">
+                                <b>
+                                    1453479#
+                                    需求_贵州移动_新增单站验收功能</b></a>
+                        </td>
+                        <td class="Red">
+                            紧急
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-桑聪
+                        </td>
+                        <td>
+                            需求_客户端
+                        </td>
+                        <td>
+                            贵州移动
+                        </td>
+                        <td>
+                            2017-08-18
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1453112" class="Blue BiggerFont">
+                                <b>
+                                    1453112#
+                                    需求_贵州移动_单站验收上传路径及解码程序部署</b></a>
+                        </td>
+                        <td class="Orange">
+                            高
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-李炳旋
+                        </td>
+                        <td>
+                            需求_其它
+                        </td>
+                        <td>
+                            贵州移动
+                        </td>
+                        <td>
+                            2017-08-17
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1452282" class="Blue BiggerFont">
+                                <b>
+                                    1452282#
+                                    需求：上海移动要求在GIS中能呈现出对应的工单及相关的问题点</b></a>
+                        </td>
+                        <td class="Orange">
+                            高
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-张华斯
+                        </td>
+                        <td>
+                            BUG_数据解析
+                        </td>
+                        <td>
+                            通用
+                        </td>
+                        <td>
+                            2017-08-16
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1451867" class="Blue BiggerFont">
+                                <b>
+                                    1451867#
+                                    需求_天津联通_客户端统计添加FDD_GSM中C/I覆盖指标</b></a>
+                        </td>
+                        <td class="Orange">
+                            高
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-罗涛
+                        </td>
+                        <td>
+                            需求_数据解析
+                        </td>
+                        <td>
+                            天津联通
+                        </td>
+                        <td>
+                            2017-08-16
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1451300" class="Blue BiggerFont">
+                                <b>
+                                    1451300#
+                                    BUG:升级后,再次点击左侧树节点刷新工单会取消工单表格过滤</b></a>
+                        </td>
+                        <td class="ThinGreen">
+                            中
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-陈奇
+                        </td>
+                        <td>
+                            BUG_其它
+                        </td>
+                        <td>
+                            通用
+                        </td>
+                        <td>
+                            2017-08-15
+                        </td>
+                    </tr>
+                    
+                    <tr class="GrayBackground">
+                        <td>
+                            <a target="_blank" href="/Bug/HandleBug/1451010" class="Blue BiggerFont">
+                                <b>
+                                    1451010#
+                                    需求：山西移动_切换专题功能-切换前后指标对比，增加字段</b></a>
+                        </td>
+                        <td class="Red">
+                            紧急
+                        </td>
+                        <td>
+                            <span class="RedBox">
+                                未修复</span>
+                        </td>
+                        <td>
+                            深圳-谢魏勇
+                        </td>
+                        <td>
+                            需求_其它
+                        </td>
+                        <td>
+                            山西移动
+                        </td>
+                        <td>
+                            2017-08-15
+                        </td>
+                    </tr>
+                    
+                </table>
+                <!--start of page -->
+                <div class="PageTop PageBtm">
+                    <div class="Page">            <table class="Tableborder5" border="0" cellpadding="0" cellspacing="1">                <tbody>                    <tr align="center">                        <td class="tablebody1" >                            &nbsp;<a href="javascript:GO(1)" >刷新</a>&nbsp;</td><td class="tablebody1" >&nbsp;|                            &nbsp;显示&nbsp;1-10&nbsp;总记录数&nbsp;2955&nbsp;</td><td class="tablebody1" >&nbsp;|&nbsp;分页:</td><td class="tablebody1" style="font-weight:bold;">                            &nbsp;<span style='text-decoration:underline;'>1</span>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(2)" >2</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(3)" >3</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(4)" >4</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(5)" >5</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(6)" >6</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(7)" >7</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(8)" >8</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(9)" >9</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(10)" >10</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(2)" >下一页</a>&nbsp;</td><td class="tablebody1">                            &nbsp;<a href="javascript:GO(296)" >尾页</a>&nbsp;</td></tr>                </tbody>            </table>        </div>
+                </div>
+                <!--end of page -->
+            </div>
+            <!--end of solution-->
+        </div>
+        <div class="clear">
+            <!-- -->
+        </div>
+    </div>
+    <!-- start of content -->
+    <div class="clear">
+        <!-- -->
+    </div>
+    <br />
+    <script type="text/javascript">
+        function OrderByThis(a) {
+            var order = $("#OrderBy").val();
+            if (order == a)
+                $("#OrderBy").val(a + " DESC");
+            else
+                $("#OrderBy").val(a);
+            document.getElementById('_form').submit();
+        }
+
+        function SubForm() {
+            document.getElementById('_form').submit();
+        }
+    
+ 
+    </script>
+
+    </div>
+    <!-- end of wrapper-->
+    
+<div class="Footer">
+    <span class="left copyright">
+        版权所有
+        © 2010 <a href="http://easybug.org">easybug.org</a></span> <span class="left"><a href="/Home/Law" target="_blank">
+            法律声明</a> | <a href="/Home/Service" target="_blank">
+                服务条款</a> | <a href="/Home/Privacy" target="_blank">
+                    隐私声明</a> | <a href="/Home/Contact" target="_blank">
+                        联系我们</a> | 
+                        <a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备14080320号</a> | 
+						<a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DeOybquKusTAcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClApM3k1lJX2BZSEph6ojmNraCpKsSYVJgWRymh6eYJ5kbVHEJJag4bfHN0hlvYc1pZOdn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank">阿里云服务器</a>
+                        </span><span class="right">
+                        
+                        <a href="http://sighttp.qq.com/cgi-bin/check?sigkey=c31f5d664c1c41afe867cda8c2549066727ac65a490d8995cabbb1db885893b4"; target=_blank; onclick="var tempSrc='http://sighttp.qq.com/wpa.js?rantime='+Math.random()+'&sigkey=c31f5d664c1c41afe867cda8c2549066727ac65a490d8995cabbb1db885893b4';var oldscript=document.getElementById('testJs');var newscript=document.createElement('script');newscript.setAttribute('type','text/javascript'); newscript.setAttribute('id', 'testJs');newscript.setAttribute('src',tempSrc);if(oldscript == null){document.body.appendChild(newscript);}else{oldscript.parentNode.replaceChild(newscript, oldscript);}return false;"><img border="0" SRC='http://wpa.qq.com/pa?p=1:108275149:42' alt="在线QQ咨询"></a>
+                        
+                            
+                            </span>
+       
+</div>
+
+
+<div style="display:none;">
+
+<script type="text/javascript">
+
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4e8e8dfab7ab20a93bb4445871ad4a28' type='text/javascript'%3E%3C/script%3E"));
+   
+</script>
+
+</div>
+ 
+</body>
+</html>

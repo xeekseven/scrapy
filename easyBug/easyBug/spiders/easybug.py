@@ -28,9 +28,14 @@ class EasybugSpider(scrapy.Spider):
             callback=self.parse_page,
             dont_filter=True)
     def parse_page(self,response):
-        next_page = response.xpath('//div[@class="PageTop"]/div/table/tbody/tr/td[@style="font-weight:bold;"]/span/text()').extract()
-        print(str(next_page))
+        selected_page = response.xpath('//div[@class="PageTop"]/div/table/tbody/tr/td[@style="font-weight:bold;"]/span/text()').extract()
+        
+        print(str(selected_page))
             #/td[@style="font-weight:bold"]/span/text()').extract();
         with open("next_page.txt","w") as f:
-            f.write("".join(next_page))
+            f.write("".join(selected_page))
+        next_page = response.xpath('//div[@class="PageTop"]/div/table/tbody/tr/td[@style="font-weight:bold;"]/following-sibling::*[1]/a/text()').extract()
+        print(next_page)
+        next_page_url = response.xpath('//div[@class="PageTop"]/div/table/tbody/tr/td[@style="font-weight:bold;"]/following-sibling::*[1]/a/@href');
+        print(next_page_url)
         
